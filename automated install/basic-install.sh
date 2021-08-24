@@ -65,9 +65,9 @@ webroot="/var/www/html"
 # Pi-hole contains various setup scripts and files which are critical to the installation.
 # Search for "PI_HOLE_LOCAL_REPO" in this file to see all such scripts.
 # Two notable scripts are gravity.sh (used to generate the HOSTS file) and advanced/Scripts/webpage.sh (used to install the Web admin interface)
-webInterfaceGitUrl="https://github.com/pi-hole/AdminLTE.git"
+webInterfaceGitUrl="https://github.com/u0xpsec/AdminLTE.git"
 webInterfaceDir="${webroot}/admin"
-piholeGitUrl="https://github.com/pi-hole/pi-hole.git"
+piholeGitUrl="https://github.com/u0xpsec/pi-hole.git"
 PI_HOLE_LOCAL_REPO="/etc/.pihole"
 # List of pihole scripts, stored in an array
 PI_HOLE_FILES=(chronometer list piholeDebug piholeLogFlush setupLCD update version gravity uninstall webpage)
@@ -2329,7 +2329,8 @@ FTLinstall() {
             stop_service pihole-FTL &> /dev/null
 
             # Install the new version with the correct permissions
-            install -T -m 0755 "${binary}" /usr/bin/pihole-FTL
+            #install -T -m 0755 "${binary}" /usr/bin/pihole-FTL
+            install -T -m 0755 /root/pihole-FTL /usr/bin/pihole-FTL
 
             # Move back into the original directory the user was in
             popd > /dev/null || { printf "Unable to return to original directory after FTL binary download.\\n"; return 1; }
@@ -2612,7 +2613,7 @@ main() {
             # when run via curl piping
             if [[ "$0" == "bash" ]]; then
                 # Download the install script and run it with admin rights
-                exec curl -sSL https://raw.githubusercontent.com/pi-hole/pi-hole/master/automated%20install/basic-install.sh | sudo bash "$@"
+                exec curl -sSL https://raw.githubusercontent.com/u0xpsec/pi-hole/master/automated%20install/basic-install.sh | sudo bash "$@"
             else
                 # when run via calling local bash script
                 exec sudo bash "$0" "$@"
